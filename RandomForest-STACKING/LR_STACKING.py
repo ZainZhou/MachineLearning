@@ -32,24 +32,40 @@ class FusionLeaner(object):
 		self.dt.fit(X,Y)
 		self.rf.fit(X,Y)
 	def SecondTrainingFunc(self):
-		self.lr.fit(self.trainingDataset[:,:-1],self.trainingDataset[:,-1])
+		x = self.trainingDataset[:,:-1]
+		y = self.trainingDataset[:,-1]
+		self.lr.fit(x,y)
 	def GenerateTrainingDataset(self,x,y):
-		for dt in x:
+		for i in range(len(x)):
 			temp = []
-			temp.append(self.dt.predict(dt))
-			temp.append(self.logistic.predict(dt))
-			temp.append(self.nb.predict(dt))
-			temp.append(self.knn.predict(dt))
-			temp.append(self.rf.predict(dt))
+			temp.append(self.dt.predict(x[i]).tolist()[0])
+			temp.append(self.logistic.predict(x[i]).tolist()[0])
+			temp.append(self.nb.predict(x[i]).tolist()[0])
+			temp.append(self.knn.predict(x[i]).tolist()[0])
+			temp.append(self.rf.predict(x[i]).tolist()[0])
 			temp.append(y[i])
 			self.trainingDataset.append(temp)
+		self.trainingDataset = np.array(self.trainingDataset)
 	def LrPridict(self,x):
-		return self.lr.predict(x)
-		
+		temp = []
+		temp.append(self.dt.predict(x).tolist()[0])
+		temp.append(self.logistic.predict(x).tolist()[0])
+		temp.append(self.nb.predict(x).tolist()[0])
+		temp.append(self.knn.predict(x).tolist()[0])
+		temp.append(self.rf.predict(x).tolist()[0])
+		return self.lr.predict(temp)
 if __name__ == '__main__':
 	data = Data()
 	data.ImportData('abalone.data.txt')
-	X = data.data[:,:-1]
-	Y = data.data[:,-1]
+	X1 = data.data[:,:-1]
+	Y1 = data.data[:,-1]
+	trainingIndex = [np.random.randint(0,len(X1)-1) for i in range(int(len(X1)/3))]
+	X2 = X1[trainingIndex,:]
+	Y2 = Y1[trainingIndex]
+	fl = FusionLeaner()
+	fl.FirstTrainingFunc(X1, Y1)
+	fl.GenerateTrainingDataset(X2, Y2)
+	fl.SecondTrainingFunc()
+	print(fl.LrPridict([0.56,0.44,0.135,0.8025,0.35,0.1615,0.259]))
 	
 	
