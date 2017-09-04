@@ -122,6 +122,7 @@ def baggingDataSet(dataSet):
 def testHousing():
     df = pd.read_csv('housing.txt')
     labels = df.columns.values.tolist()
+    print(type(df.iloc[0,:].values))
     # 生成多棵回归树，放到一个list里边
     treeCounts = 10
     treeList = []
@@ -136,4 +137,6 @@ def testHousing():
         label = treeClassify(tree, labels[:-1], testData)
         labelPred.append(label)
     print("预测值是: %d" %np.mean(labelPred))
-testHousing()
+    
+if __name__ == '__main__':
+    testHousing()
