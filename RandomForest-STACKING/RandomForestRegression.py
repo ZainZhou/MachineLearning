@@ -122,7 +122,6 @@ def baggingDataSet(dataSet):
 def testHousing():
     df = pd.read_csv('housing.txt')
     labels = df.columns.values.tolist()
-    print(type(df.iloc[0,:].values))
     # 生成多棵回归树，放到一个list里边
     treeCounts = 10
     treeList = []
