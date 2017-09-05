@@ -1,7 +1,7 @@
-##随机森林与基于LR的STACKING算法
-#####周政
+## 随机森林与基于LR的STACKING算法
+##### 周政
 
-####随机森林算法实现(CART算法建树：误差平方和最小划分数据集)
+#### 随机森林算法实现(CART算法建树：误差平方和最小划分数据集)
 - 数据集划分方法
 
 ```json
@@ -157,7 +157,7 @@ if __name__ == '__main__':
 
 [Github地址](https://github.com/ZainZhou/MachineLearning/tree/master/RandomForest-STACKING)
 
-####基于LR的STACKING算法
+#### 基于LR的STACKING算法
 
 - 数据类
 
