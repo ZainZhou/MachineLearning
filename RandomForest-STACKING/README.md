@@ -55,7 +55,7 @@ def chooseBestFeature(dataSet):
                 bestSplitValue = splitValue
     return bestFeatureIndex, bestSplitValue
 
-# 去掉第i个属性，生成新的数据集
+# 去掉第i个属性，生成新的数据集 
 def splitData(dataSet, featIndex, features, value):
     newFeatures = copy.deepcopy(features)
     newFeatures.remove(features[featIndex])
