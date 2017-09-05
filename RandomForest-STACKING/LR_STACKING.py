@@ -16,7 +16,6 @@ class Data(object):
 	def ImportData(self,path):
 		df = pd.read_csv(path)
 		self.data = df.iloc[:,1:].values
-#	def DivideDataset(self,p):
 		
 #融合学习模型
 class FusionLeaner(object):
@@ -83,7 +82,7 @@ if __name__ == '__main__':
 	data.ImportData('abalone.data.txt')
 	X1 = data.data[:,:-1]
 	Y1 = data.data[:,-1]
-	#从数据集中随机取出约90%作为第二次学习的训练集，剩下约10%作为测试集
+	#从数据集中随机取出约80%作为第二次学习的训练集，剩下约20%作为最后的测试集
 	trainingIndex = [np.random.randint(0,len(X1)-1) for i in range(int(len(X1)*0.8))]
 	X2 = X1[trainingIndex,:]
 	Y2 = Y1[trainingIndex]
